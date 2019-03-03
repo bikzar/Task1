@@ -85,7 +85,7 @@ public abstract class Credit implements ParameterizedSearch {
 			return false;
 		}
 
-		if (!(Double.doubleToLongBits(maxSizeOfCredit) <= Double
+		if (!(Double.doubleToLongBits(maxSizeOfCredit) >= Double
 				.doubleToLongBits(credit.maxSizeOfCredit))) {
 			return false;
 		}

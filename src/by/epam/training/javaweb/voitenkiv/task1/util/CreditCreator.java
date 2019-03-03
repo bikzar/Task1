@@ -11,7 +11,7 @@ import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.TypeOfIn
 
 public class CreditCreator {
 
-	public static Credit createCredit() {
+	public static Credit createRandomCredit() {
 
 		Random random = new Random();
 		Credit newInstanse;
@@ -36,6 +36,24 @@ public class CreditCreator {
 		}
 
 		return newInstanse;
+	}
+
+	public static Credit createCreditFromUserChoise(int userChoise) {
+
+		Credit credit;
+
+		switch (userChoise) {
+		case 1:
+			credit = new CompanyCredit();
+			break;
+		case 2:
+			credit = new IndividualsCredit();
+			break;
+		default:
+			credit = new IndividualsCredit();
+		}
+
+		return credit;
 	}
 
 }

@@ -7,7 +7,7 @@ import by.epam.training.javaweb.voitenkiv.task1.model.entity.financialintermedia
 
 public class BankCreator {
 
-    public static Bank createBank() throws InputCreditIsNullException {
+    public static Bank createBank() {
 
 	Random random = new Random();
 
@@ -17,7 +17,11 @@ public class BankCreator {
 	int sizeOfCreditList = random.nextInt(9)+1;
 	
 	for(int i = 0 ; i < sizeOfCreditList; i++) {
-	    bank.addCreditToList(CreditCreator.createCredit());
+	    try {
+			bank.addCreditToList(CreditCreator.createRandomCredit());
+		} catch (InputCreditIsNullException e) {
+			
+		}
 	}
 	
 	return bank;
