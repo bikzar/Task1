@@ -10,13 +10,7 @@ public class InputNationalBankInstIsNullException
     public InputNationalBankInstIsNullException() {
     }
 
-    public InputNationalBankInstIsNullException(String message,
-	    Throwable cause) {
-	super(message, cause);
-    }
-
-    public InputNationalBankInstIsNullException(Throwable cause) {
-	super(cause);
-    }
-
+	public InputNationalBankInstIsNullException(String message) {
+		super(message);
+	}
 }

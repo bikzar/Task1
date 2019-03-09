@@ -10,13 +10,7 @@ public class InputNameOfIntermediaryIsNullException
     public InputNameOfIntermediaryIsNullException() {
     }
 
-    public InputNameOfIntermediaryIsNullException(String message,
-	    Throwable cause) {
-	super(message, cause);
-    }
-
-    public InputNameOfIntermediaryIsNullException(Throwable cause) {
-	super(cause);
-    }
-
+	public InputNameOfIntermediaryIsNullException(String message) {
+		super(message);
+	}
 }

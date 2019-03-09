@@ -10,13 +10,7 @@ public class NegativeValueOfCreditPercentage
     public NegativeValueOfCreditPercentage() {
     }
 
-    public NegativeValueOfCreditPercentage(String message,
-	    Throwable cause) {
-	super(message, cause);
-    }
-
-    public NegativeValueOfCreditPercentage(Throwable cause) {
-	super(cause);
-    }
-
+	public NegativeValueOfCreditPercentage(String message) {
+		super(message);
+	}
 }

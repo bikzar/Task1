@@ -10,11 +10,7 @@ public class InputFinancialIntermediaryIsNullException
     public InputFinancialIntermediaryIsNullException() {
     }
 
-    public InputFinancialIntermediaryIsNullException(Throwable cause) {
-	super(cause);
-    }
-
-    public InputFinancialIntermediaryIsNullException(String message, Throwable cause) {
-	super(message, cause);
-    }
+	public InputFinancialIntermediaryIsNullException(String message) {
+		super(message);
+	}
 }

@@ -10,12 +10,7 @@ public class InputSizeOfCompanyIsNullException
     public InputSizeOfCompanyIsNullException() {
     }
 
-    public InputSizeOfCompanyIsNullException(String message,
-	    Throwable cause) {
-	super(message, cause);
-    }
-
-    public InputSizeOfCompanyIsNullException(Throwable cause) {
-	super(cause);
-    }
+	public InputSizeOfCompanyIsNullException(String message) {
+		super(message);
+	}
 }

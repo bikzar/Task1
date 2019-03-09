@@ -52,7 +52,7 @@ public class CreditSearcher {
 		int numberOfRemovElem = 0;
 
 		/**
-		 * Remove elements from credit's list in every Creditholder if it doesn't have
+		 * Remove elements from credit's list in every CreditHolder if it doesn't have
 		 * equal object's parameters
 		 **/
 		for (Credit credit : listOfCreditHolder.getListOfCredit()) {

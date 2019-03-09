@@ -1,6 +1,6 @@
 package by.epam.training.javaweb.voitenkiv.task1.model.entity.credit;
 
-import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.TypeOfCurrensy;
+import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.TypeOfCurrency;
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.TypeOfIndividualsCredit;
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.InputTypeOfIndividualCreditIsNullException;
 
@@ -18,7 +18,7 @@ public class IndividualsCredit extends Credit {
 
 	public IndividualsCredit(
 			TypeOfIndividualsCredit typeOfIndivCredit,
-			String nameOfCredit, TypeOfCurrensy typeOfCurrency,
+			String nameOfCredit, TypeOfCurrency typeOfCurrency,
 			double percentage, boolean isActive,
 			double maxSizeOfCredit, boolean isClosing,
 			boolean isFixedPercentage) {

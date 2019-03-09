@@ -10,12 +10,7 @@ public class ListOfCreditIsNullException
     public ListOfCreditIsNullException() {
     }
 
-    public ListOfCreditIsNullException(Throwable cause) {
-	super(cause);
-    }
-
-    public ListOfCreditIsNullException(String message,
-	    Throwable cause) {
-	super(message, cause);
-    }
+	public ListOfCreditIsNullException(String message) {
+		super(message);
+	}
 }

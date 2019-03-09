@@ -10,12 +10,7 @@ public class ListOfFinancialIntemediaryIsNullExcrption
     public ListOfFinancialIntemediaryIsNullExcrption() {
     }
 
-    public ListOfFinancialIntemediaryIsNullExcrption(String message,
-	    Throwable cause) {
-	super(message, cause);
-    }
-
-    public ListOfFinancialIntemediaryIsNullExcrption(Throwable cause) {
-	super(cause);
-    }
+	public ListOfFinancialIntemediaryIsNullExcrption(String message) {
+		super(message);
+	}
 }

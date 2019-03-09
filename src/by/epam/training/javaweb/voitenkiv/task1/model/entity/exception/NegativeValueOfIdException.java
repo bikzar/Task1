@@ -10,12 +10,7 @@ public class NegativeValueOfIdException
     public NegativeValueOfIdException() {
     }
 
-    public NegativeValueOfIdException(String message,
-	    Throwable cause) {
-	super(message, cause);
-    }
-
-    public NegativeValueOfIdException(Throwable cause) {
-	super(cause);
-    }
+	public NegativeValueOfIdException(String message) {
+		super(message);
+	}
 }

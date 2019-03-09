@@ -1,7 +1,7 @@
 package by.epam.training.javaweb.voitenkiv.task1.model.entity.credit;
 
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.SizeOfCompany;
-import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.TypeOfCurrensy;
+import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.TypeOfCurrency;
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.InputSizeOfCompanyIsNullException;
 
 public class CompanyCredit extends Credit {
@@ -17,7 +17,7 @@ public class CompanyCredit extends Credit {
 	}
 
 	public CompanyCredit(SizeOfCompany sizeOfCompany,
-			String nameOfCredit, TypeOfCurrensy typeOfCurrency,
+			String nameOfCredit, TypeOfCurrency typeOfCurrency,
 			double percentage, boolean isActive,
 			double maxSizeOfCredit, boolean isClosing,
 			boolean isFixedPercentage) {
@@ -85,9 +85,7 @@ public class CompanyCredit extends Credit {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
+
 		if (!super.equals(obj)) {
 			return false;
 		}

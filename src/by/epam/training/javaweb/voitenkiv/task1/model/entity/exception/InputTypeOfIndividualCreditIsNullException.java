@@ -10,13 +10,8 @@ public class InputTypeOfIndividualCreditIsNullException
     public InputTypeOfIndividualCreditIsNullException() {
     }
 
-    public InputTypeOfIndividualCreditIsNullException(String message,
-	    Throwable cause) {
-	super(message, cause);
-    }
-
-    public InputTypeOfIndividualCreditIsNullException(
-	    Throwable cause) {
-	super(cause);
-    }
+	public InputTypeOfIndividualCreditIsNullException(
+			String message) {
+		super(message);
+	}
 }

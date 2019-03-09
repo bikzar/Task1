@@ -10,9 +10,9 @@ import by.epam.training.javaweb.voitenkiv.task1.model.logic.Sorter;
 import by.epam.training.javaweb.voitenkiv.task1.model.logic.comparator.SortCreditTypeFactory;
 import by.epam.training.javaweb.voitenkiv.task1.model.logic.exception.InputNationalBankInstIsNullException;
 import by.epam.training.javaweb.voitenkiv.task1.util.ConsolePrinter;
-import by.epam.training.javaweb.voitenkiv.task1.util.CreditCreator;
-import by.epam.training.javaweb.voitenkiv.task1.util.NationalBankCreator;
-
+import by.epam.training.javaweb.voitenkiv.task1.util.creator.CreditCreator;
+import by.epam.training.javaweb.voitenkiv.task1.util.creator.NationalBankCreator;
+import by.epam.training.javaweb.voitenkiv.task1.util.interfaceforutil.Printer;
 import by.epam.training.javaweb.voitenkiv.task1.viwe.SimpleViwe;
 
 public class MainController {
@@ -42,7 +42,7 @@ public class MainController {
 			
 			//make user choice for type of printer
 			
-			ConsolePrinter conPrin = new ConsolePrinter();
+			Printer conPrin = new ConsolePrinter();
 			
 			for (CreditHolder ch : creditHolders) {
 				conPrin.print(ch);

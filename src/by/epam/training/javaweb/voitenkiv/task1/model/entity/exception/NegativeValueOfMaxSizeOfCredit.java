@@ -10,12 +10,7 @@ public class NegativeValueOfMaxSizeOfCredit
     public NegativeValueOfMaxSizeOfCredit() {
     }
 
-    public NegativeValueOfMaxSizeOfCredit(String message,
-	    Throwable cause) {
-	super(message, cause);
-    }
-
-    public NegativeValueOfMaxSizeOfCredit(Throwable cause) {
-	super(cause);
-    }
+	public NegativeValueOfMaxSizeOfCredit(String message) {
+		super(message);
+	}
 }
