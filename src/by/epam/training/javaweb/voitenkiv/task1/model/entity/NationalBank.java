@@ -5,23 +5,27 @@ import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.InputFina
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.ListOfFinancialIntemediaryIsNullExcrption;
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.financialintermediary.FinancialIntermediary;
 
+/**
+ * @author Sergey Voitenkov March 16 2019
+ */
+
 public class NationalBank {
 
 	private FinancialIntermediary[] listOfFinInterm;
 	private static NationalBank instanseOfNationalBank;
 	private int indexOfPreviousElem;
 	private int indexOfNextElement;
-	private final static int DEFAULTSIZE = 10;
+	private final static int DEFAULT_FINANC_INTERDMED_LIST_SIZE = 10;
 
 	{
-		listOfFinInterm = new FinancialIntermediary[DEFAULTSIZE];
+		listOfFinInterm = new FinancialIntermediary[DEFAULT_FINANC_INTERDMED_LIST_SIZE];
 	}
 
 	private NationalBank(
 			FinancialIntermediary[] listOfFinancialIntermediary) {
 
 		if (listOfFinancialIntermediary != null
-				&& checkListForNull(listOfFinInterm)) {
+				&& checkListForNull(listOfFinancialIntermediary)) {
 
 			this.listOfFinInterm = listOfFinancialIntermediary;
 			indexOfPreviousElem = listOfFinancialIntermediary.length
@@ -63,7 +67,12 @@ public class NationalBank {
 
 		if (listOfFinInterm != null
 				&& checkListForNull(listOfFinInterm)) {
+
 			this.listOfFinInterm = listOfFinInterm;
+			indexOfPreviousElem = listOfFinInterm.length
+					- 1;
+			indexOfNextElement = listOfFinInterm.length;
+
 		} else {
 			throw new ListOfFinancialIntemediaryIsNullExcrption();
 		}
@@ -71,13 +80,15 @@ public class NationalBank {
 
 	private boolean checkListForNull(FinancialIntermediary[] list) {
 
+		boolean resualt = true;
+
 		for (FinancialIntermediary financialIntermediary : list) {
 
 			if (financialIntermediary == null) {
-				return false;
+				resualt = false;
 			}
 		}
-		return true;
+		return resualt;
 	}
 
 	public void addFinIntermedToList(
@@ -86,23 +97,11 @@ public class NationalBank {
 
 		if (newFinancialIntermediary != null) {
 
-			if (indexOfNextElement < listOfFinInterm.length) {
-
-				listOfFinInterm[indexOfNextElement] = newFinancialIntermediary;
-
-			} else {
-				FinancialIntermediary[] newListOfFinInterm = new FinancialIntermediary[listOfFinInterm.length
-						* 2];
-				int i;
-
-				for (i = 0; i < listOfFinInterm.length; i++) {
-					newListOfFinInterm[i] = listOfFinInterm[i];
-				}
-
-				newListOfFinInterm[i] = newFinancialIntermediary;
-
-				listOfFinInterm = newListOfFinInterm;
+			if (indexOfNextElement > listOfFinInterm.length) {
+				resizeList();
 			}
+
+			listOfFinInterm[indexOfNextElement] = newFinancialIntermediary;
 
 			indexOfNextElement++;
 			indexOfPreviousElem = indexOfNextElement - 1;
@@ -111,6 +110,18 @@ public class NationalBank {
 			throw new InputFinancialIntermediaryIsNullException();
 		}
 
+	}
+
+	private void resizeList() {
+
+		FinancialIntermediary[] newListOfFinInterm = new FinancialIntermediary[listOfFinInterm.length
+				* 2];
+
+		for (int i = 0; i < listOfFinInterm.length; i++) {
+			newListOfFinInterm[i] = listOfFinInterm[i];
+		}
+
+		listOfFinInterm = newListOfFinInterm;
 	}
 
 	public void removeFinIntermedFromList(int indexOfFinIntermed)

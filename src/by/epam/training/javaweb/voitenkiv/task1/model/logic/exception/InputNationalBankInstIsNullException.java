@@ -2,10 +2,13 @@ package by.epam.training.javaweb.voitenkiv.task1.model.logic.exception;
 
 import by.epam.training.javaweb.voitenkiv.task1.model.exception.LogicCreditProjecException;
 
+/**
+ * @author Sergey Voitenkov March 16 2019
+ */
+
+@SuppressWarnings("serial")
 public class InputNationalBankInstIsNullException
 	extends LogicCreditProjecException {
-
-    private static final long serialVersionUID = -6784625585956444365L;
 
     public InputNationalBankInstIsNullException() {
     }

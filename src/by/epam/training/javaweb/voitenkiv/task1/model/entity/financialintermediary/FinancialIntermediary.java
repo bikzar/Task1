@@ -3,16 +3,20 @@ package by.epam.training.javaweb.voitenkiv.task1.model.entity.financialintermedi
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.InputNameOfIntermediaryIsNullException;
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.NegativeValueOfIdException;
 
+/**
+ * @author Sergey Voitenkov March 16 2019
+ */
+
 public abstract class FinancialIntermediary {
 
 	private int idNumberOfIntermediary;
-	private String nameOfIntermediary;
+	private String intermediaryName;
 	private static final int DEFAULT_ID_NUMBER = -1;
 	private static final String DEFAULT_INTERM_NAME = "Defaul Name";
 
 	{
 		idNumberOfIntermediary = DEFAULT_ID_NUMBER;
-		nameOfIntermediary = DEFAULT_INTERM_NAME;
+		intermediaryName = DEFAULT_INTERM_NAME;
 	}
 
 	public FinancialIntermediary() {
@@ -26,7 +30,7 @@ public abstract class FinancialIntermediary {
 		}
 
 		if (nameOfIntermediary != null) {
-			this.nameOfIntermediary = nameOfIntermediary;
+			this.intermediaryName = nameOfIntermediary;
 		}
 	}
 
@@ -48,14 +52,14 @@ public abstract class FinancialIntermediary {
 	}
 
 	public String getNameOfIntermediary() {
-		return nameOfIntermediary;
+		return intermediaryName;
 	}
 
 	public void setNameOfIntermediary(String nameOfIntermediary)
 			throws InputNameOfIntermediaryIsNullException {
 
 		if (nameOfIntermediary != null) {
-			this.nameOfIntermediary = nameOfIntermediary;
+			this.intermediaryName = nameOfIntermediary;
 		} else {
 			throw new InputNameOfIntermediaryIsNullException();
 		}
@@ -66,22 +70,19 @@ public abstract class FinancialIntermediary {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + idNumberOfIntermediary;
-		result = prime * result + ((nameOfIntermediary == null) ? 0
-				: nameOfIntermediary.hashCode());
+		result = prime * result + ((intermediaryName == null) ? 0
+				: intermediaryName.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
+
 		if (this == obj) {
 			return true;
 		}
 
-		if (obj == null) {
-			return false;
-		}
-
-		if (getClass() != obj.getClass()) {
+		if (obj == null || getClass() != obj.getClass()) {
 			return false;
 		}
 
@@ -91,20 +92,21 @@ public abstract class FinancialIntermediary {
 			return false;
 		}
 
-		if (nameOfIntermediary == null) {
-			if (other.nameOfIntermediary != null) {
+		if (intermediaryName == null) {
+			if (other.intermediaryName != null) {
 				return false;
 			}
-		} else if (!nameOfIntermediary
-				.equals(other.nameOfIntermediary)) {
+		} else if (!intermediaryName
+				.equals(other.intermediaryName)) {
 			return false;
 		}
+		
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "\n[idNumberOfIntermediary: " + idNumberOfIntermediary
-				+ ", nameOfIntermediary: " + nameOfIntermediary + "]";
+				+ ", nameOfIntermediary: " + intermediaryName + "]";
 	}
 }

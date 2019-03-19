@@ -1,49 +1,45 @@
 package by.epam.training.javaweb.voitenkiv.task1.model.entity.credit;
 
-import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.SizeOfCompany;
-import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.TypeOfCurrency;
+import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.CompanySizeType;
+import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.CurrencyType;
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.InputSizeOfCompanyIsNullException;
+
+/**
+ * @author Sergey Voitenkov March 16 2019
+ */
 
 public class CompanyCredit extends Credit {
 
-	private SizeOfCompany sizeOfCompany;
-	private static final SizeOfCompany DEF_SIZE_OF_COMPANY = SizeOfCompany.Small;
-
-	{
-		sizeOfCompany = DEF_SIZE_OF_COMPANY;
-	}
+	private CompanySizeType companySize = CompanySizeType.SMALL;
 
 	public CompanyCredit() {
 	}
 
-	public CompanyCredit(SizeOfCompany sizeOfCompany,
-			String nameOfCredit, TypeOfCurrency typeOfCurrency,
+	public CompanyCredit(CompanySizeType companySize,
+			String creditName, CurrencyType currencyType,
 			double percentage, boolean isActive,
 			double maxSizeOfCredit, boolean isClosing,
 			boolean isFixedPercentage) {
 
-		super(nameOfCredit, typeOfCurrency, percentage, isActive,
+		super(creditName, currencyType, percentage, isActive,
 				maxSizeOfCredit, isClosing, isFixedPercentage);
 
-		if (sizeOfCompany != null) {
-			this.sizeOfCompany = sizeOfCompany;
+		if (companySize != null) {
+			this.companySize = companySize;
 		}
 	}
 
 	@Override
 	public boolean extraEquals(Credit credit) {
 
-		if (!super.extraEquals(credit)) {
-			return false;
-		}
-
-		if (this.getClass() != credit.getClass()) {
+		if (!super.extraEquals(credit)
+				|| this.getClass() != credit.getClass()) {
 			return false;
 		}
 
 		CompanyCredit companyCredit = (CompanyCredit) credit;
 
-		if (sizeOfCompany != companyCredit.sizeOfCompany) {
+		if (companySize != companyCredit.companySize) {
 			return false;
 		}
 
@@ -53,22 +49,22 @@ public class CompanyCredit extends Credit {
 	@Override
 	public CompanyCredit getCloneOfCredit() {
 
-		return new CompanyCredit(this.sizeOfCompany,
+		return new CompanyCredit(this.companySize,
 				this.getNameOfCredit(), this.getTypeOfCurrency(),
 				this.getPercentage(), this.isActive(),
 				this.getMaxSizeOfCredit(), this.isClosing(),
 				this.isFixedPercentage());
 	}
 
-	public SizeOfCompany getSizeOfCompany() {
-		return sizeOfCompany;
+	public CompanySizeType getSizeOfCompany() {
+		return companySize;
 	}
 
-	public void setSizeOfCompany(SizeOfCompany sizeOfCompany)
+	public void setSizeOfCompany(CompanySizeType companySize)
 			throws InputSizeOfCompanyIsNullException {
 
-		if (sizeOfCompany != null) {
-			this.sizeOfCompany = sizeOfCompany;
+		if (companySize != null) {
+			this.companySize = companySize;
 		} else {
 			throw new InputSizeOfCompanyIsNullException();
 		}
@@ -78,32 +74,30 @@ public class CompanyCredit extends Credit {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((sizeOfCompany == null) ? 0
-				: sizeOfCompany.hashCode());
+		result = prime * result + ((companySize == null) ? 0
+				: companySize.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (!super.equals(obj) || getClass() != obj.getClass()) {
 			return false;
 		}
 
 		CompanyCredit other = (CompanyCredit) obj;
 
-		if (sizeOfCompany != other.sizeOfCompany) {
+		if (companySize != other.companySize) {
 			return false;
 		}
+
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "\nCompanysCredit:" + super.toString()
-				+ ", sizeOfCompany=" + sizeOfCompany + "]";
+				+ ", sizeOfCompany=" + companySize + "]";
 	}
 }

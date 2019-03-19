@@ -1,8 +1,11 @@
 package by.epam.training.javaweb.voitenkiv.task1.model.exception;
 
-public class CreditProjectException extends Throwable {
+/**
+ * @author Sergey Voitenkov March 16 2019
+ */
 
-	private static final long serialVersionUID = 7604923403620479478L;
+@SuppressWarnings("serial")
+public class CreditProjectException extends Throwable {
 
 	public CreditProjectException() {
 	}

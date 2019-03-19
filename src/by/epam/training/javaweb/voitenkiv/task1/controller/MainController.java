@@ -1,55 +1,60 @@
 package by.epam.training.javaweb.voitenkiv.task1.controller;
 
-import java.util.Comparator;
-
 import by.epam.training.javaweb.voitenkiv.task1.model.appinterface.CreditHolder;
+
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.NationalBank;
-import by.epam.training.javaweb.voitenkiv.task1.model.entity.credit.Credit;
+import by.epam.training.javaweb.voitenkiv.task1.model.entity.credit.CompanyCredit;
+import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.ListOfFinancialIntemediaryIsNullExcrption;
+
+import by.epam.training.javaweb.voitenkiv.task1.model.exception.TechnicalCreditProjectException;
+
 import by.epam.training.javaweb.voitenkiv.task1.model.logic.CreditSearcher;
 import by.epam.training.javaweb.voitenkiv.task1.model.logic.Sorter;
-import by.epam.training.javaweb.voitenkiv.task1.model.logic.comparator.SortCreditTypeFactory;
+import by.epam.training.javaweb.voitenkiv.task1.model.logic.comparator.CreditNameComparator;
 import by.epam.training.javaweb.voitenkiv.task1.model.logic.exception.InputNationalBankInstIsNullException;
-import by.epam.training.javaweb.voitenkiv.task1.util.ConsolePrinter;
-import by.epam.training.javaweb.voitenkiv.task1.util.creator.CreditCreator;
+
 import by.epam.training.javaweb.voitenkiv.task1.util.creator.NationalBankCreator;
-import by.epam.training.javaweb.voitenkiv.task1.util.interfaceforutil.Printer;
-import by.epam.training.javaweb.voitenkiv.task1.viwe.SimpleViwe;
+import by.epam.training.javaweb.voitenkiv.task1.util.creator.randomdatagenerator.RandomNationalBankDataGenerator;
+import by.epam.training.javaweb.voitenkiv.task1.view.printer.FilePrinter;
+import by.epam.training.javaweb.voitenkiv.task1.view.printer.printerinterface.Printable;
+
+/**
+ * @author Sergey Voitenkov March 16 2019
+ */
 
 public class MainController {
 
+	private MainController() {
+	}
+
 	public static void main(String[] args) {
 
-		Credit creditForUser = CreditCreator
-				.createCreditFromUserChoise(
-						SimpleViwe.choiseTypeOfCredit());
 
-		SimpleViwe.chatWithUser(creditForUser);
-
-		NationalBank nationalBank = NationalBankCreator
-				.creatNationalBank();
-
+		NationalBank nationalBank = null;
 		try {
+			nationalBank = NationalBankCreator
+					.creatNationalBank(new RandomNationalBankDataGenerator());
 
 			CreditHolder[] creditHolders;
 
 			creditHolders = CreditSearcher.searchCreditWithParametrs(
-					nationalBank, creditForUser);
+					nationalBank.getListOfFinInterm(), new CompanyCredit());
 
-			Comparator<Credit> comp = SortCreditTypeFactory
-					.getComparator(SimpleViwe.choiceTypeOfSort());
-
-			Sorter.sortCreditListInCreditHolder(creditHolders, comp);
+			Sorter.sortCreditListInCreditHolder(creditHolders, new CreditNameComparator());
 			
-			//make user choice for type of printer
-			
-			Printer conPrin = new ConsolePrinter();
-			
+			Printable conPrin = new FilePrinter("/home/sergey/c.txt");
+						
 			for (CreditHolder ch : creditHolders) {
-				conPrin.print(ch);
+				try {
+					conPrin.print(ch);
+				} catch (TechnicalCreditProjectException e) {
+					
+					e.printStackTrace();
+				}
 			}
 			
 			
-		} catch (InputNationalBankInstIsNullException e) {
+		} catch (InputNationalBankInstIsNullException | ListOfFinancialIntemediaryIsNullExcrption e) {
 
 		}
 	}

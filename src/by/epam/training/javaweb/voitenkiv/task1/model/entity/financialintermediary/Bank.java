@@ -6,16 +6,20 @@ import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.Incorrect
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.InputCreditIsNullException;
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.ListOfCreditIsNullException;
 
+/**
+ * @author Sergey Voitenkov March 16 2019
+ */
+
 public class Bank extends FinancialIntermediary
 		implements CreditHolder {
 
-	private Credit[] listOfCredit;
+	private Credit[] creditList;
 	private int indexOfPreviousElemOfList;
 	private int indexOfNextElementOfList;
-	private final static int DEFAULTSIZE = 10;
+	private final static int DEFAULT_CREDIT_LIST_SIZE = 10;
 
 	{
-		listOfCredit = new Credit[DEFAULTSIZE];
+		creditList = new Credit[DEFAULT_CREDIT_LIST_SIZE];
 	}
 
 	public Bank() {
@@ -40,7 +44,7 @@ public class Bank extends FinancialIntermediary
 		super(idNumberOfBank, nameOfBank);
 
 		if (listOfCredit != null && checkListForNull(listOfCredit)) {
-			this.listOfCredit = listOfCredit;
+			this.creditList = listOfCredit;
 			indexOfPreviousElemOfList = listOfCredit.length - 1;
 			indexOfNextElementOfList = listOfCredit.length;
 		}
@@ -58,7 +62,7 @@ public class Bank extends FinancialIntermediary
 		Credit[] newListOfCredit = new Credit[indexOfNextElementOfList];
 
 		for (int i = 0; i < indexOfNextElementOfList; i++) {
-			newListOfCredit[i] = listOfCredit[i].getCloneOfCredit();
+			newListOfCredit[i] = creditList[i].getCloneOfCredit();
 		}
 
 		return newListOfCredit;
@@ -69,7 +73,7 @@ public class Bank extends FinancialIntermediary
 			throws ListOfCreditIsNullException {
 
 		if (listOfCredit != null && checkListForNull(listOfCredit)) {
-			this.listOfCredit = listOfCredit;
+			this.creditList = listOfCredit;
 			indexOfPreviousElemOfList = listOfCredit.length - 1;
 			indexOfNextElementOfList = listOfCredit.length;
 		} else {
@@ -82,24 +86,11 @@ public class Bank extends FinancialIntermediary
 			throws InputCreditIsNullException {
 
 		if (inputCredit != null) {
-			if (indexOfNextElementOfList < listOfCredit.length) {
-
-				listOfCredit[indexOfNextElementOfList] = inputCredit;
-
-			} else {
-
-				Credit[] newListOfCredit = new Credit[listOfCredit.length
-						* 2];
-				int i;
-
-				for (i = 0; i < listOfCredit.length; i++) {
-					newListOfCredit[i] = listOfCredit[i];
-				}
-
-				newListOfCredit[i] = inputCredit;
-
-				listOfCredit = newListOfCredit;
+			if (indexOfNextElementOfList > creditList.length) {
+				resizeList();
 			}
+
+			creditList[indexOfNextElementOfList] = inputCredit;
 
 			indexOfNextElementOfList++;
 			indexOfPreviousElemOfList = indexOfNextElementOfList - 1;
@@ -107,7 +98,18 @@ public class Bank extends FinancialIntermediary
 		} else {
 			throw new InputCreditIsNullException();
 		}
+	}
 
+	private void resizeList() {
+
+		Credit[] newListOfCredit = new Credit[creditList.length
+				* 2];
+
+		for (int i = 0; i < creditList.length; i++) {
+			newListOfCredit[i] = creditList[i];
+		}
+
+		creditList = newListOfCredit;
 	}
 
 	@Override
@@ -120,8 +122,8 @@ public class Bank extends FinancialIntermediary
 			if (indexOfCredit != indexOfPreviousElemOfList) {
 
 				for (int i = indexOfCredit; i < indexOfPreviousElemOfList; i++) {
-					listOfCredit[i] = listOfCredit[i + 1];
-					listOfCredit[i + 1] = null;
+					creditList[i] = creditList[i + 1];
+					creditList[i + 1] = null;
 				}
 
 			}
@@ -156,7 +158,7 @@ public class Bank extends FinancialIntermediary
 		final int prime = 31;
 		int result = super.hashCode();
 
-		for (Credit credit : listOfCredit) {
+		for (Credit credit : creditList) {
 			result = prime * result
 					+ ((credit == null) ? 0 : credit.hashCode());
 		}
@@ -165,19 +167,15 @@ public class Bank extends FinancialIntermediary
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!super.equals(obj)) {
+
+		if (!super.equals(obj) || getClass() != obj.getClass()) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
+
 		Bank other = (Bank) obj;
 
 		for (int i = 0; i < indexOfNextElementOfList; i++) {
-			if (!listOfCredit[i].equals(other.listOfCredit[i])) {
+			if (!creditList[i].equals(other.creditList[i])) {
 				return false;
 			}
 		}
@@ -192,7 +190,7 @@ public class Bank extends FinancialIntermediary
 				super.toString() + "\nlistOfCredit: ");
 
 		for (int i = 0; i < indexOfNextElementOfList; i++) {
-			str.append(listOfCredit[i].toString());
+			str.append(creditList[i].toString());
 		}
 
 		return str.toString();

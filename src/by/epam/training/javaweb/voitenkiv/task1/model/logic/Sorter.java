@@ -6,6 +6,10 @@ import by.epam.training.javaweb.voitenkiv.task1.model.appinterface.CreditHolder;
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.credit.Credit;
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.ListOfCreditIsNullException;
 
+/**
+ * @author Sergey Voitenkov March 16 2019
+ */
+
 public class Sorter {
 
 	public static void sortCreditListInCreditHolder(
@@ -15,7 +19,7 @@ public class Sorter {
 
 			Credit[] listOfCredits = cred.getListOfCredit();
 
-			sortOfCreditList(0, list.length - 1, listOfCredits, comp);
+			sortCreditList(0, listOfCredits.length - 1, listOfCredits, comp);
 
 			try {
 				cred.setListOfCredit(listOfCredits);
@@ -25,7 +29,7 @@ public class Sorter {
 		}
 	}
 
-	private static void sortOfCreditList(int startElement,
+	private static void sortCreditList(int startElement,
 			int lastElement, Credit[] list,
 			Comparator<Credit> comparator) {
 
@@ -60,12 +64,12 @@ public class Sorter {
 			}
 
 			if (leftBorder < lastElement) {
-				sortOfCreditList(leftBorder, lastElement, list,
+				sortCreditList(leftBorder, lastElement, list,
 						comparator);
 			}
 
 			if (rightBorder > startElement) {
-				sortOfCreditList(startElement, rightBorder, list,
+				sortCreditList(startElement, rightBorder, list,
 						comparator);
 			}
 		}

@@ -3,14 +3,18 @@ package by.epam.training.javaweb.voitenkiv.task1.model.entity.credit;
 import java.text.DecimalFormat;
 
 import by.epam.training.javaweb.voitenkiv.task1.model.appinterface.ParameterizedSearch;
-import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.TypeOfCurrency;
+import by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum.CurrencyType;
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.NegativeValueOfCreditPercentage;
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.NegativeValueOfMaxSizeOfCredit;
 
+/**
+ * @author Sergey Voitenkov March 16 2019
+ */
+
 public abstract class Credit implements ParameterizedSearch {
 
-	private String nameOfCredit;
-	private TypeOfCurrency typeOfCurrency;
+	private String creditName;
+	private CurrencyType currencyType;
 	private double percentage;
 	private boolean isActive;
 	private double maxSizeOfCredit;
@@ -18,27 +22,27 @@ public abstract class Credit implements ParameterizedSearch {
 	private boolean isFixedPercentage;
 
 	private static final String DEFAUL_NAME_OF_CREDIT = "Empty Name";
-	private static final TypeOfCurrency DEFAULT_TYPE_OF_CUR = TypeOfCurrency.Dollor;
+	private static final CurrencyType DEFAULT_TYPE_OF_CUR = CurrencyType.DOLLOR;
 
 	{
-		nameOfCredit = DEFAUL_NAME_OF_CREDIT;
-		typeOfCurrency = DEFAULT_TYPE_OF_CUR;
+		creditName = DEFAUL_NAME_OF_CREDIT;
+		currencyType = DEFAULT_TYPE_OF_CUR;
 	}
 
 	public Credit() {
 	}
 
-	public Credit(String nameOfCredit, TypeOfCurrency typeOfCurrency,
+	public Credit(String creditName, CurrencyType currencyType,
 			double percentage, boolean isActive,
 			double maxSizeOfCredit, boolean isClosing,
 			boolean isFixedPercentage) {
 
-		if (nameOfCredit != null) {
-			this.nameOfCredit = nameOfCredit;
+		if (creditName != null) {
+			this.creditName = creditName;
 		}
 
-		if (typeOfCurrency != null) {
-			this.typeOfCurrency = typeOfCurrency;
+		if (currencyType != null) {
+			this.currencyType = currencyType;
 		}
 
 		if (percentage > 0) {
@@ -58,46 +62,24 @@ public abstract class Credit implements ParameterizedSearch {
 		isActive = credit.isActive;
 		isClosing = credit.isClosing;
 		isFixedPercentage = credit.isFixedPercentage;
-		nameOfCredit = credit.nameOfCredit;
+		creditName = credit.creditName;
 		percentage = credit.percentage;
-		typeOfCurrency = credit.typeOfCurrency;
+		currencyType = credit.currencyType;
 		maxSizeOfCredit = credit.maxSizeOfCredit;
 	}
-	
+
 	public abstract Credit getCloneOfCredit();
-	
-	//rewrite this part of code with pattern Decorator
+
 	public boolean extraEquals(Credit credit) {
 
-		if (credit == null) {
+		if (!(equalsSamePart(credit))) {
 			return false;
 		}
 
-		if (this == credit) {
-			return true;
-		}
-
-		if (this.isActive == false) {
-			return false;
-		}
-
-		if (this.isClosing != credit.isClosing) {
-			return false;
-		}
-
-		if (this.isFixedPercentage != credit.isFixedPercentage) {
-			return false;
-		}
-
-		if (this.typeOfCurrency != credit.typeOfCurrency) {
-			return false;
-		}
-
-		if (Double.compare(percentage, credit.percentage) > 0) {
-			return false;
-		}
-
-		if (Double.compare(maxSizeOfCredit, credit.maxSizeOfCredit) < 0) {
+		if (!(this.isActive == true)
+				|| !(Double.compare(percentage, credit.percentage) <= 0)
+				|| !(Double.compare(maxSizeOfCredit,
+						credit.maxSizeOfCredit) >= 0)) {
 			return false;
 		}
 
@@ -105,11 +87,11 @@ public abstract class Credit implements ParameterizedSearch {
 	}
 
 	public String getNameOfCredit() {
-		return nameOfCredit;
+		return creditName;
 	}
 
-	public TypeOfCurrency getTypeOfCurrency() {
-		return typeOfCurrency;
+	public CurrencyType getTypeOfCurrency() {
+		return currencyType;
 	}
 
 	public double getPercentage() {
@@ -175,59 +157,37 @@ public abstract class Credit implements ParameterizedSearch {
 		long temp;
 		temp = Double.doubleToLongBits(maxSizeOfCredit);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((nameOfCredit == null) ? 0
-				: nameOfCredit.hashCode());
+		result = prime * result + ((creditName == null) ? 0
+				: creditName.hashCode());
 		temp = Double.doubleToLongBits(percentage);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((typeOfCurrency == null) ? 0
-				: typeOfCurrency.hashCode());
+		result = prime * result + ((currencyType == null) ? 0
+				: currencyType.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 
-		if (obj == null) {
-			return false;
-		}
-
-		if (this == obj) {
-			return true;
-		}
-
-		if (this.getClass() != obj.getClass()) {
+		if (!equalsSamePart(obj)) {
 			return false;
 		}
 
 		Credit credit = (Credit) obj;
-
-		if (isClosing != credit.isClosing) {
+		
+		if (creditName == null) {
+			if (credit.creditName != null) {
+				return false;
+			}
+		} else if (!creditName.equals(credit.creditName)) {
 			return false;
 		}
 
-		if (isActive != credit.isActive) {
-			return false;
-		}
-
-		if (isFixedPercentage != credit.isFixedPercentage) {
-			return false;
-		}
-
-		if (Double.doubleToLongBits(percentage) != Double
-				.doubleToLongBits(credit.percentage)) {
-			return false;
-		}
-
-		if (Double.doubleToLongBits(maxSizeOfCredit) != Double
-				.doubleToLongBits(credit.maxSizeOfCredit)) {
-			return false;
-		}
-
-		if (!nameOfCredit.equals(credit.nameOfCredit)) {
-			return false;
-		}
-
-		if (!(typeOfCurrency == credit.typeOfCurrency)) {
+		if (isActive != credit.isActive
+				|| Double.doubleToLongBits(percentage) != Double
+						.doubleToLongBits(credit.percentage)
+				|| Double.doubleToLongBits(maxSizeOfCredit) != Double
+						.doubleToLongBits(credit.maxSizeOfCredit)) {
 			return false;
 		}
 
@@ -236,13 +196,39 @@ public abstract class Credit implements ParameterizedSearch {
 
 	@Override
 	public String toString() {
-		
+
 		DecimalFormat decimalFormat = new DecimalFormat("#.00");
-		
-		return "nameOfDeposit = " + nameOfCredit + ", typeOfCurrency = "
-				+ typeOfCurrency + ", percentage = " + String.format("%.2f",percentage)
-				+ ", isActive = " + isActive + ", maxSizeOfCredit = "
-				+ decimalFormat.format(maxSizeOfCredit) + ", isClosing = " + isClosing
+
+		return "nameOfDeposit = " + creditName
+				+ ", typeOfCurrency = " + currencyType
+				+ ", percentage = "
+				+ String.format("%.2f", percentage) + ", isActive = "
+				+ isActive + ", maxSizeOfCredit = "
+				+ decimalFormat.format(maxSizeOfCredit)
+				+ ", isClosing = " + isClosing
 				+ ", isFixedPercentage = " + isFixedPercentage;
 	}
+
+	private boolean equalsSamePart(Object obj) {
+
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj == null || this.getClass() != obj.getClass()) {
+			return false;
+		}
+
+		Credit credit = (Credit) obj;
+
+		if (isClosing != credit.isClosing
+				|| isFixedPercentage != credit.isFixedPercentage
+				|| !(currencyType == credit.currencyType)) {
+			return false;
+		}
+
+		return true;
+	}
+
 }
+

@@ -5,6 +5,10 @@ import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.Incorrect
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.InputCreditIsNullException;
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.ListOfCreditIsNullException;
 
+/**
+ * @author Sergey Voitenkov March 16 2019
+ */
+
 public interface CreditHolder {
 
     public Credit[] getListOfCredit();
@@ -19,4 +23,6 @@ public interface CreditHolder {
 
     public void setListOfCredit(Credit[] listOfCredit)
 	    throws ListOfCreditIsNullException;
+    
+    public String toString();
 }

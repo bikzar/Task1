@@ -4,6 +4,10 @@ import java.util.Comparator;
 
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.credit.Credit;
 
+/**
+ * @author Sergey Voitenkov March 16 2019
+ */
+
 public class CreditPercentageComparator
 	implements Comparator<Credit> {
 

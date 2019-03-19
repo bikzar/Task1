@@ -1,30 +1,26 @@
 package by.epam.training.javaweb.voitenkiv.task1.util.creator;
 
-import java.util.Random;
-
 import by.epam.training.javaweb.voitenkiv.task1.model.entity.NationalBank;
+import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.ListOfFinancialIntemediaryIsNullExcrption;
+import by.epam.training.javaweb.voitenkiv.task1.util.creator.creatorinterface.NationalBankDataSupplier;
 
-import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.InputFinancialIntermediaryIsNullException;
+/**
+ * @author Sergey Voitenkov March 16 2019
+ */
 
 public class NationalBankCreator {
 
-	public static NationalBank creatNationalBank() {
+	public static NationalBank creatNationalBank(
+			NationalBankDataSupplier dataSupplier) throws ListOfFinancialIntemediaryIsNullExcrption {
 
-		Random random = new Random();
+		NationalBank resualt = NationalBank.getInstance();
 
-		NationalBank nationalBank = NationalBank.getInstance();
+		if (dataSupplier != null) {
+			resualt.setListOfFinInterm(
+					dataSupplier.getListOfFinInterm());
 
-		int numberOfBank = random.nextInt(7) + 1;
-
-		for (int i = 0; i < numberOfBank; i++) {
-			try {
-				nationalBank
-						.addFinIntermedToList(BankCreator.createBank());
-			} catch (InputFinancialIntermediaryIsNullException e) {
-				
-			}
 		}
 
-		return nationalBank;
+		return resualt;
 	}
 }
