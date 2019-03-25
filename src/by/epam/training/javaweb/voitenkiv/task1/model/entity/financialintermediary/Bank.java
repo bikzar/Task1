@@ -26,20 +26,11 @@ public class Bank extends FinancialIntermediary
 	}
 
 	public Bank(int idNumberOfBank, String nameOfBank) {
-
-		// Is it need to check input parameters?
-		// Can i think that super constructor protected for
-		// this parameters?
-
 		super(idNumberOfBank, nameOfBank);
 	}
 
 	public Bank(int idNumberOfBank, String nameOfBank,
 			Credit[] listOfCredit) {
-
-		// Is it need to check input parameters?
-		// Can i think that super constructor protected for
-		// this parameters?
 
 		super(idNumberOfBank, nameOfBank);
 
@@ -190,7 +181,7 @@ public class Bank extends FinancialIntermediary
 				super.toString() + "\nlistOfCredit: ");
 
 		for (int i = 0; i < indexOfNextElementOfList; i++) {
-			str.append(creditList[i].toString());
+			str.append(creditList[i]);
 		}
 
 		return str.toString();

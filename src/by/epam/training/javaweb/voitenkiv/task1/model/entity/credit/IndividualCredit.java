@@ -10,7 +10,7 @@ import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.InputType
 
 public class IndividualCredit extends Credit {
 
-	private IndividualCreditType indivCreditType = IndividualCreditType.CONSUMERLOAN;
+	private IndividualCreditType indivCreditType = IndividualCreditType.CONSUMER_LOAN;
 
 	public IndividualCredit() {
 	}

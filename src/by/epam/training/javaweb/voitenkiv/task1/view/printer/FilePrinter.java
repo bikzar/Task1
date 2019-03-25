@@ -1,11 +1,12 @@
 package by.epam.training.javaweb.voitenkiv.task1.view.printer;
 
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-import by.epam.training.javaweb.voitenkiv.task1.view.printer.exception.WronOutputPathTechnicalException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epam.training.javaweb.voitenkiv.task1.view.printer.printerinterface.Printable;
 
 /**
@@ -13,6 +14,12 @@ import by.epam.training.javaweb.voitenkiv.task1.view.printer.printerinterface.Pr
  */
 
 public class FilePrinter implements Printable {
+
+	private static final Logger LOGGER;
+	
+	static {
+		LOGGER = LogManager.getRootLogger();
+	}
 
 	private String filePath = null;
 
@@ -24,23 +31,19 @@ public class FilePrinter implements Printable {
 	}
 
 	@Override
-	public void print(Object obj)
-			throws WronOutputPathTechnicalException {
+	public void print(Object obj) {
 
 		Writer writer = null;
 
 		try {
-
-			writer = new FileWriter(filePath, true);
-			writer.write(obj.toString());
-
-		} catch (FileNotFoundException e) {
-
-			throw new WronOutputPathTechnicalException(
-					"File not found", e);
+			if (obj != null && filePath != null) {
+				writer = new FileWriter(filePath, true);
+				writer.write(obj.toString());
+			}
 
 		} catch (IOException e) {
-			// write to loger
+			LOGGER.warn(
+					"IOException in print() methood FilePrinter class");
 		} finally {
 
 			if (writer != null) {
@@ -48,10 +51,13 @@ public class FilePrinter implements Printable {
 				try {
 					writer.close();
 				} catch (IOException e) {
-					// write to loger
+					LOGGER.warn(
+							"IOException with writer.close() in FilePrinter class");
 				}
 			}
 		}
+		
+		LOGGER.debug("End MyFileReader clss");
 	}
 
 	public void setFilePath(String filePath) {

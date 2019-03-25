@@ -5,5 +5,5 @@ package by.epam.training.javaweb.voitenkiv.task1.model.entity.entityenum;
  */
 
 public enum IndividualCreditType {
-	FORCAR, FORHOUSE, CONSUMERLOAN;
+	FOR_CAR, FOR_HOUSE, CONSUMER_LOAN;
 }
