@@ -1,5 +1,6 @@
 package by.epam.training.javaweb.voitenkiv.task1.model.entity.credit;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
 import by.epam.training.javaweb.voitenkiv.task1.model.appinterface.ParameterizedSearch;
@@ -11,7 +12,7 @@ import by.epam.training.javaweb.voitenkiv.task1.model.entity.exception.NegativeV
  * @author Sergey Voitenkov March 16 2019
  */
 
-public abstract class Credit implements ParameterizedSearch {
+public abstract class Credit implements ParameterizedSearch, Serializable {
 
 	private String creditName;
 	private CurrencyType currencyType;

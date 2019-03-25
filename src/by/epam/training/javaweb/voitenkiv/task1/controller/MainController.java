@@ -13,6 +13,7 @@ import by.epam.training.javaweb.voitenkiv.task1.util.creator.filedatagenerator.r
 import by.epam.training.javaweb.voitenkiv.task1.util.creator.filedatagenerator.validator.CompanyCreditValidator;
 import by.epam.training.javaweb.voitenkiv.task1.util.creator.filedatagenerator.validator.IndividualCreditValidator;
 import by.epam.training.javaweb.voitenkiv.task1.util.creator.filedatagenerator.validator.validatorinterface.Validator;
+import by.epam.training.javaweb.voitenkiv.task1.util.serializator.CreditSerializator;
 import by.epam.training.javaweb.voitenkiv.task1.view.printer.FilePrinter;
 import by.epam.training.javaweb.voitenkiv.task1.view.printer.printerinterface.Printable;
 
@@ -78,6 +79,13 @@ public class MainController {
 				conPrin.print(credit);
 			}
 			
+			String filePath ="/home/sergey/Credit.bin";
+							
+			CreditSerializator.write(creditList.get(0), filePath);
+			
+			Credit credit = CreditSerializator.read(filePath);
+			
+			LOGGER.debug("\nValue writed object: " + creditList.get(0) + "\nValue read object: " + credit);
 			
 		} catch (TechnicalCreditProjectException e) {
 			LOGGER.warn("Incorrect file path", e);
